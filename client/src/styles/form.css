@@ -1,0 +1,39 @@
+table {
+  border: 1px solid black;
+  margin: 2%;
+}
+td {
+  padding: 2%;
+  width: 50%;
+
+  font-weight: 600;
+}
+#header {
+  background-color: lightgray;
+  color: navy;
+  height: 40px;
+}
+td > input {
+  width: 100%;
+  height: 24px;
+}
+
+select {
+  width: 100%;
+
+  height: 30px;
+}
+
+#submit {
+  background-color: orange;
+  color: white;
+  border: 0;
+  height: 40px;
+  width: 210%;
+  cursor: pointer;
+}
+
+#startDate,
+#endDate {
+  width: 48.5%;
+}
