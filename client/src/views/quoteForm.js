@@ -26,7 +26,8 @@ class quoteForm extends React.Component {
       endDate: "",
       citizenShip: "",
       mailingState: "",
-      quotes: ""
+      quotes: "",
+      error: ""
     });
   };
   handleChange = event => {
@@ -42,18 +43,23 @@ class quoteForm extends React.Component {
     });
   };
 
+  validate = () => {
+    if (this.state.age > 100) {
+      this.setState({ error: "Age cannot be more than 100." });
+      return false;
+    } else if (new Date(this.state.startDate) > new Date(this.state.endDate)) {
+      this.setState({ error: "The end date should be after the start date." });
+      return false;
+    } else return true;
+  };
+
   handleSubmit = event => {
     event.preventDefault();
-
     const data = { age: this.state.age };
-    console.log(this.state.age);
-    console.log(this.state.startDate);
-    if (new Date(this.state.startDate) < new Date(this.state.endDate)) {
+    if (this.validate()) {
       postQuote(data).then(response => {
         if (response.success) this.props.history.push("/quotes");
       });
-    } else {
-      this.setState({ error: "Check date" });
     }
   };
 
@@ -63,8 +69,9 @@ class quoteForm extends React.Component {
         <form onSubmit={this.handleSubmit}>
           <table id="table">
             <tbody>
-              <tr>
-                <td id="header">INSUBUY Travel Insurance</td>
+              <tr id="header">
+                <td>INSUBUY Travel Insurance</td>
+                <td />
               </tr>
               <tr>
                 <td>
@@ -155,13 +162,13 @@ class quoteForm extends React.Component {
               </tr>
               <tr>
                 <td>
-                  <input type="submit" value="Get Quotes" id="submit" />
+                  <input type="submit" value="Get Quotes" id="submit" /> <br />
+                  <button onClick={this.resetForm}>Reset</button>
                 </td>
               </tr>
               <tr>
                 <td>
-                  <div>{this.state.error}</div>
-                  <button onClick={this.resetForm}>Reset</button>
+                  <div id="error">{this.state.error}</div>
                 </td>
               </tr>
             </tbody>
