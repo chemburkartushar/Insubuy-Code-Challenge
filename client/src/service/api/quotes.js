@@ -1,14 +1,17 @@
 export const getQuotes = () => {
-  fetch("http://localhost:8080/quotes/")
-    .then(response => response.json())
-    .then(values => console.log(values));
+  return fetch("http://localhost:8080/quotes/").then(response =>
+    response.json()
+  );
 };
 
 export const postQuote = data => {
-  fetch("http://localhost:8080/quotes/", {
+  return fetch("http://localhost:8080/quotes/", {
     method: "POST",
     body: JSON.stringify(data)
   })
-    .then(response => response.json())
-    .then(values => console.log("Done: ", values));
+    .then(response => {
+      if (response.status !== 200) throw Error("Something went wrong.");
+      return response;
+    })
+    .then(response => response.json());
 };

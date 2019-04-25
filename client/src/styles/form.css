@@ -37,3 +37,11 @@ select {
 #endDate {
   width: 48.5%;
 }
+button {
+  color: blue;
+  background: white;
+  border: 0;
+}
+#reset {
+  width: 100%;
+}
