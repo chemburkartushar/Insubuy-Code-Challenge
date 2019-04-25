@@ -11,7 +11,6 @@ function App() {
         <Route path="/quotes" component={Result} />
       </div>
     </BrowserRouter>
-    // <QuoteForm />
   );
 }
 export default App;
